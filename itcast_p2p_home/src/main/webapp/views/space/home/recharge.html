@@ -1,0 +1,26 @@
+<div class="table_box trade_data">
+    <table width="100%" class="table">
+        <thead>
+            <tr>
+                <th width="13%" style="text-align:center;">时间</th>
+                <th width="13%" style="text-align:center;">交易类型</th>
+                <th width="27%" style="text-align:center;">交易详情</th>
+                <th width="16%" style="text-align:center;">金额(元)</th>
+                <th width="18%" style="text-align:center;">余额(元)</th>
+                <th width="13%" style="text-align:center;">状态</th>
+            </tr>
+        </thead>
+        <tr ng-if="!rechargelist"><td colspan="6">暂时没有数据！</td></tr>
+        <tr ng-repeat="item in rechargelist">
+            <td ng-bind="item.date"></td>
+            <td ng-bind="item.trantype"></td>
+            <td ng-bind="item.descreption"></td>
+            <td><span class="c_grey" ng-bind="item.amount"></span></td>
+            <td ng-bind="item.balance"></td>
+            <td ng-bind="item.status"></td>
+        </tr>
+    </table>
+</div>
+<div ng-if="totalItems" class="fr">
+    <pagination ng-change="search(currentPage,type)" total-items="totalItems" items-per-page="itemsPerPage"  ng-model="currentPage" max-size="maxSize"  class="pagination-sm" boundary-links="true" rotate="false"  first-text="首页" last-text="尾页" previous-text="上一页" next-text="下一页"></pagination>
+</div>

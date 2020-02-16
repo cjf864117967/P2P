@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="itcast_p2p_jms:war">
+    <output-path>$PROJECT_DIR$/itcast_p2p_jms/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>itcast_p2p_jms</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="p2p.war">
+      <element id="artifact" artifact-name="itcast_p2p_jms:war exploded" />
+    </root>
+  </artifact>
+</component>

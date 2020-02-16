@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="unauthorizedUrl" value="/views/login.html"></property>
+		<property name="loginUrl" value="/views/login.html"></property>
+
+		<property name="FilterChainDefinitions">
+			<value>
+				/views/login.html*=anon
+
+				/#/home*=authc
+				/views/home.html*=authc
+				/views/product_manage/*=authc
+				/views/*=authc
+			</value>
+		</property>
+
+		<property name="securityManager" ref="securityManager"></property>
+
+	</bean>
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"></bean>
+
+	<bean id="lifecycle" class="org.apache.shiro.spring.LifecycleBeanPostProcessor">
+	</bean>
+	<bean
+			class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+			depends-on="lifecycle" >
+		<property name="proxyTargetClass" value="true"></property>
+	</bean>
+	<bean
+			class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+</beans>

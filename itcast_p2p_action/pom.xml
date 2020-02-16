@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>cn.itcast.p2p</groupId>
+  <artifactId>itcast_p2p_action</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <parent>
+    <groupId>cn.itcast.p2p</groupId>
+    <artifactId>itcast_p2p</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../itcast_p2p/pom.xml</relativePath>
+  </parent>
+  <name>itcast_p2p_action Maven Webapp</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>cn.itcast.p2p</groupId>
+      <artifactId>itcast_p2p_domain</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>cn.itcast.p2p</groupId>
+      <artifactId>itcast_p2p_dao</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>cn.itcast.p2p</groupId>
+      <artifactId>itcast_p2p_service</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>cn.itcast.p2p</groupId>
+      <artifactId>itcast_p2p_utils</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>cn.itcast.p2p</groupId>
+      <artifactId>itcast_p2p_cache</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>cn.itcast.p2p</groupId>
+      <artifactId>itcast_p2p_cache</artifactId>
+
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+</project>

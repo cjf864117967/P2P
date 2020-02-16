@@ -1,0 +1,336 @@
+<div id="mainarea"> 
+    <!--loc-->
+    <div class="loc"> 债权管理 &gt; 债权查询 </div>
+    <!--loc end-->
+    <div class="container"> 
+        <!--全部有效交易-->
+        <div class="tabContent"> 
+            <!--area_block-->
+            <div class="area_block">
+                <div class="area_content area_table">
+                    <table width="100%" class="table-edit">
+                        <tr> 
+                            <td class="tr">标的编号：</td>
+                            <td><input type="text" ng-model="params.dDebtNo" style="width:85px;"></td>
+                            <td class="tr">借款ID：</td>
+                            <td><input type="text" ng-model="params.dContractNo" style="width:85px;"></td>
+                            <td class="tr">债权转入日期：</td>
+                            <td><input type="text" datepicker datestart="datestart"  id="date_start" ng-model="params.dDebtTransferredDateStart" style="width:225px;" readonly="true"/>
+                                &nbsp;至&nbsp;
+                                <input type="text" datepicker dateend="dateend"  id="date_end" ng-model="params.dDebtTransferredDateEnd" style="width:225px;" readonly="true"/></td>
+                        </tr>
+                        <tr>
+                            <td class="tr">债权状态：</td>
+                            <td>
+                                <select id="dDebtStatus" style="width:235px;">
+                                    <option value="">全部</option>
+                                    <option value="11301">未审核</option>
+                                    <option value="11302">已审核</option>
+                                    <option value="11303">正常还款</option>
+                                    <option value="11304">已结清</option>
+                                    <option value="11305">提前结清</option>
+                                    <option value="11306">结算失败</option>
+                                </select>
+                            </td>
+                            <td class="tr">债权匹配状态：</td>
+                            <td>
+                                <select id="dMatchedStatus" style="width:235px;">
+                                    <option value="">全部</option>
+                                    <option value="11401">部分匹配</option>
+                                    <option value="11402">完全匹配</option>
+                                    <option value="11403">未匹配</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="area_foot tc">
+                    <button type="button" class="button button-affirm" ng-click="search(currentPage)">&nbsp;查询&nbsp;</button>
+                </div>
+            </div>
+            <!--area_block end--> 
+            <!--area_block-->
+            <div class="area_block">
+                <div class="btn_group">
+                    <div class="fl btn_group_left">
+                        <button type="button" class="button" ng-click="settlement(2)">提前结清</button>
+                        <button type="button" class="button" data-target="#auditMod" role="button" data-toggle="modal" ng-click="auditObj.confirm()">审核</button>
+                  		<!--<button type="button" class="button" ng-click="settlement(2)">新提前结清</button>-->
+                    </div>
+                    <div class="fr btn_group_right">
+                        <button type="button" class="button" ui-sref="home.entering" href>单笔录入</button>
+                        <button type="button" class="button" ui-sref="home.multiple" href>批量导入</button>
+                        <button type="button" class="button" ng-click="exportCredit()">导出</button>
+                    </div>
+                </div>
+                <div class="area_content area_table">
+                    <table width="100%" class="table-data table-row tc">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" ng-model="master"></th>
+                            <th>标的编号</th>
+                            <th>标的类型</th>
+                            <th>借款ID（合同编号）</th>
+                            <th>债权转入日期</th>
+                            <th>还款日</th>
+                            <th>债权月利率</th>
+                            <th>债权转入金额</th>
+                            <th>每期还款金额</th>
+                            <th>债权已匹配金额</th>
+                            <th>债权可用金额</th>
+                            <th>债权可用期数</th>
+                            <th>债权状态</th>
+                            <th>债权匹配状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="arguments in rights"  id="{{arguments.id}}">
+                                <td><input type="checkbox" ng-checked="master" value="{{arguments.id}},{{arguments.debtStatus}}" _data ="{{arguments}}"></td>
+                                <td>{{arguments.debtNo}}</td>
+                                <td>{{arguments.loanType}}</td>
+                                <td width="11%">{{arguments.contractNo}}</td>
+                                <td>{{arguments.debtTransferredDate}}</td>
+                                <td>{{arguments.repaymenDate}}</td>
+                                <td>{{arguments.debtMonthRate}}</td>
+                                <td>{{arguments.debtTransferredMoney}}</td> 
+                                <td>{{arguments.repaymenMoney}}</td>
+                                <td>{{arguments.matchedMoney}}</td>
+                                <td>{{arguments.availableMoney}}</td>
+                                <td>{{arguments.availablePeriod}}</td>
+                                <td>{{arguments.debtStatusDesc}}</td>
+                                <td>{{arguments.matchedStatusDesc}}</td>
+                                <td width="8%">
+                                    <a style="cursor:pointer;display:block;" data-target="#myModal" role="button" data-toggle="modal" class="c_blue right_btn right_detail"  ng-click="detail(arguments.id)">查看债权详情</a>
+                                    <a style="cursor:pointer;" class="c_blue right_btn" ui-sref="home.entering({dId:arguments.id})" ng-show="editShow(arguments.debtStatus)">编辑</a>
+                                    <a style="cursor:pointer;" href="javascript:;" class="c_blue right_btn" ng-click="delet(arguments.id)" ng-show="editShow(arguments.debtStatus)">删除</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="area_foot" style="overflow:hidden"> 
+                    <table class="table-data table-row tc">
+                        <tr>
+                            <th>合计记录</th>
+                            <th>债权转入金额合计</th>
+                            <th>债权可用金额合计</th>
+                        </tr>
+                        <tr>
+                            <td>{{datasume.dIdCount}}</td>
+                            <td>{{datasume.dDebtMoneySum}}</td>
+                            <td>{{datasume.dAvailableMoneySum}}</td>
+                        </tr>
+                    </table>
+                    <div class="fr">
+                        <pagination ng-change="search(currentPage)" total-items="totalItems" items-per-page="itemsPerPage" max-size="maxSize" ng-model="currentPage" class="pagination-sm" boundary-links="true" first-text="首页" last-text="尾页" previous-text="上一页" next-text="下一页"></pagination>
+                    </div>
+                </div>
+            </div>
+            <!--area_block end--> 
+        </div>
+        <!--全部有效交易 end--> 
+    </div>
+
+    <!--modal-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" ng-class="{true: 'mo965', false: 'mo385'}[editable]">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">原始债权数据</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal_filed">
+                        <label>标的编号：</label>
+                        {{panel.dDebtNo}} 
+                    </div>
+                    <ul>
+                        <li>
+                            <label>借款ID（合同编号）：</label>
+                            <span ng-hide="editable">{{panel.dContractNo}}</span>
+                            <input ng-show="editable" type="text" style="width:225px;" ng-model="panel.dContractNo">
+                        </li>
+                        <li>
+                            <label>债务人：</label>
+                            <span ng-hide="editable">{{panel.dDebtorsName}}</span>
+                            <input ng-show="editable" type="text" style="width:225px;" ng-model="panel.dDebtorsName">
+                        </li>
+                        <li>
+                            <label>身份证号：</label>
+                            <span ng-hide="editable">{{panel.dDebtorsId}}</span>
+                            <input ng-show="editable" type="text" style="width:225px;" ng-model="panel.dDebtorsId">
+                        </li>
+                        <li style="height:auto">
+                            <label>借款用途：</label>
+                            <span ng-hide="editable">{{panel.dLoanPurpose}}</span>
+                            <input ng-show="editable" type="text" style="width:225px;" ng-model="panel.dLoanPurpose">
+                        </li>
+                        <li>
+                            <label>借款类型：</label>
+                            <span ng-hide="editable">{{panel.dLoanType}}</span>
+                            <input ng-show="editable" type="text" style="width:225px;" ng-model="panel.dLoanType">
+                        </li>
+                        <li>
+                            <label>原始期限（月）：</label>
+                            <span ng-hide="editable">{{panel.dLoanPeriod}}</span>
+                            <input ng-show="editable" type="text" style="width:225px;" ng-model="panel.dLoanPeriod">
+                        </li>
+                        <li>
+                            <label>原始期限开始日期：</label>
+                            <span ng-hide="editable">{{panel.dLoanStartDate}}</span>
+                            <input ng-show="editable" datepicker id="dLoanStartDate" type="text" style="width:225px;" ng-model="panel.dLoanStartDate">
+                        </li>
+                        <li>
+                            <label>原始期限结束日期：</label>
+                            <span ng-hide="editable">{{panel.dLoanEndDate}}</span>
+                            <input ng-show="editable" datepicker id="dLoanEndDate" type="text" style="width:225px;" ng-model="panel.dLoanEndDate">
+                        </li>
+                    </ul>
+                    <div class="modal_filed">
+                        <label>还款方式：</label>
+                        <span ng-hide="editable">{{panel.dRepaymentStyleName}}</span>
+                        <span ng-show="editable" id="dRepaymentStyle" ng-model="dRepaymentStyleName"> 
+                            <input type="radio" name="dRepaymentStyle" value="11601" checked="true">等额本息
+                            <input type="radio" name="dRepaymentStyle" value="11602">按月付息到期还本
+                            <input type="radio" name="dRepaymentStyle" value="11603">到期一次性还款
+                        </span>
+                    </div>
+                    <ul>
+                        <li>
+                            <label>还款日：</label>
+                            <span ng-hide="editable">{{panel.dRepaymenDate}}</span>
+                            <input ng-show="editable" type="text" name="dRepaymenDate" id="dRepaymenDate" style="width:225px;" ng-model="panel.dRepaymenDate">
+                        </li>
+                        <li>
+                            <label>还款金额：</label>
+                            <span ng-hide="editable">{{panel.dRepaymenMoney}}</span>
+                            <input ng-show="editable" type="text" name="dRepaymenMoney" id="dRepaymenMoney" style="width:225px;" ng-model="panel.dRepaymenMoney">
+                        </li>
+                        <li>
+                            <label>债权金额（元）：</label>
+                            <span ng-hide="editable">{{panel.dDebtMoney}}</span>
+                            <input ng-show="editable" type="text" name="dDebtMoney" id="dDebtMoney" style="width:225px;" ng-model="panel.dDebtMoney">
+                        </li>
+                        <li>
+                            <label>债权月利率（%）：</label>
+                            <span ng-hide="editable">{{panel.dDebtMonthRate}}</span>
+                            <input ng-show="editable" type="text" name="dDebtMonthRate" id="dDebtMonthRate" style="width:225px;" ng-model="panel.dDebtMonthRate">
+                        </li>
+                        <li>
+                            <label>债权转入金额：</label>
+                            <span ng-hide="editable">{{panel.dDebtTransferredMoney}}</span>
+                            <input ng-show="editable" type="text" name="dDebtTransferredMoney" id="dDebtTransferredMoney" style="width:225px;" ng-model="panel.dDebtTransferredMoney">
+                        </li>
+                        <li>
+                            <label>债权转入期限（月）：</label>
+                            <span ng-hide="editable">{{panel.dDebtTransferredPeriod}}</span>
+                            <input ng-show="editable" type="text" name="dDebtTransferredPeriod" id="dDebtTransferredPeriod" style="width:225px;" ng-model="panel.dDebtTransferredPeriod">
+                        </li>
+                        <li>
+                            <label>债权转入日期：</label>
+                            <span ng-hide="editable">{{panel.dDebtTransferredDate}}</span>
+                            <input ng-show="editable" datepicker type="text" name="dDebtTransferredDate" id="dDebtTransferredDate" style="width:225px;" ng-model="panel.dDebtTransferredDate">
+                        </li>
+                        <li>
+                            <label>债权转出日期：</label>
+                            <span ng-hide="editable">{{panel.dDebtRansferOutDate}}</span>
+                            <input ng-show="editable" datepicker type="text" name="dCreditor" id="dDebtRansferOutDates" style="width:225px;" ng-model="panel.dDebtRansferOutDate">
+                        </li>
+                        <li>
+                            <label>债权人：</label>
+                            <span ng-hide="editable">{{panel.dCreditor}}</span>
+                            <input ng-show="editable" type="text" name="dCreditor" id="dCreditor" style="width:225px;" ng-model="panel.dCreditor">
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-show="editable" ng-click="save()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="auditMod" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" ng-class="mo385">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">债权审核</h4>
+                </div>
+                <div class="modal-body">
+                    记录：{{auditObj.ids.length}}条<br/>
+                    审核通过将进入待匹配债权队列
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="auditObj.submit()">确认</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmBox" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" ng-class="mo385">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">债权审核</h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal_filed">
+                    <label>标的编号：</label>
+                    {{comfirm.dDebtNo}} 
+                </div>
+                <div class="modal_filed">
+                    <label>债权状态：</label>
+                    {{comfirm.dDebtStatusName}} 
+                </div>
+                <div class="modal_filed">
+                    <label>当前可用债权金额：</label>
+                    {{comfirm.dAvailableMoney}} 
+                </div>
+                <div class="modal_filed">
+                    注意：提前结清将释放,当前债权下所有投资
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="submitConfirm()">确认</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="newconfirmBox" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" ng-class="mo385">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">债权审核</h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal_filed">
+                    <label>标的编号：</label>
+                    {{newcomfirm.dDebtNo}} 
+                </div>
+                <div class="modal_filed">
+                    <label>债权状态：</label>
+                    {{newcomfirm.dDebtStatusName}} 
+                </div>
+                <div class="modal_filed">
+                    <label>当前可用债权金额：</label>
+                    {{newcomfirm.dAvailableMoney}} 
+                </div>
+                <div class="modal_filed">
+                    注意：提前结清将释放,当前债权下所有投资
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="newsubmitConfirm()">确认</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

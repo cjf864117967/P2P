@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/itcast_p2p_cache" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/itcast_p2p_dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/itcast_p2p_domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/itcast_p2p_rbac" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/itcast_p2p_service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/itcast_p2p_utils" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

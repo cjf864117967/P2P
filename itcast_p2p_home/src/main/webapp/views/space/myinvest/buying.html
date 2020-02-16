@@ -1,0 +1,27 @@
+<div class="table_box">
+    <table width="100%" class="table" id="otable">
+        <tr>
+            <td>计划名称</td>
+            <td>投资金额(元)</td>
+            <td>年利率</td>
+            <td>待收本息(元)</td>
+            <td>月收本息(元)</td>
+            <td>期数(月)</td>
+            <td>加入时间</td>
+            <td>状态</td>
+        </tr>
+        <tr ng-repeat="book in books">
+            <td ng-bind="book.pProductName"></td><!--产品类型-->
+            <td ng-bind="book.pAmount"></td><!--金额-->
+            <td ng-bind="book.pEarnings"></td><!--预期年化收益-->
+            <td ng-bind="book.pEndInvestTotalMoney"></td><!--每月盈取利息-->
+            <td ng-bind="book.pMonthlyExtractInterest"></td><!--每月提取利息-->
+            <td ng-bind="book.pDeadline"></td><!--选择期限-->
+            <td ng-bind="book.pBeginDate"></td><!--加入日期-->
+            <td ng-bind="book.pStatusName"></td><!--状态-->
+        </tr>
+    </table>
+</div>
+<div ng-if="totalItems" class="fr">
+    <pagination ng-change="getData(currentPage)" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" class="pagination-sm" boundary-links="true" first-text="首页" last-text="尾页" previous-text="上一页" next-text="下一页" max-size="maxSize"></pagination>
+</div>

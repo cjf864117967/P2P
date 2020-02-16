@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MyBank/MyBank.iml" filepath="$PROJECT_DIR$/MyBank/MyBank.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/P2P.iml" filepath="$PROJECT_DIR$/.idea/P2P.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_p2p/itcast_p2p.iml" filepath="$PROJECT_DIR$/itcast_p2p/itcast_p2p.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_p2p_action/itcast_p2p_action.iml" filepath="$PROJECT_DIR$/itcast_p2p_action/itcast_p2p_action.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_p2p_cache/itcast_p2p_cache.iml" filepath="$PROJECT_DIR$/itcast_p2p_cache/itcast_p2p_cache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_p2p_dao/itcast_p2p_dao.iml" filepath="$PROJECT_DIR$/itcast_p2p_dao/itcast_p2p_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_p2p_domain/itcast_p2p_domain.iml" filepath="$PROJECT_DIR$/itcast_p2p_domain/itcast_p2p_domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_p2p_home/itcast_p2p_home.iml" filepath="$PROJECT_DIR$/itcast_p2p_home/itcast_p2p_home.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_p2p_jms/itcast_p2p_jms.iml" filepath="$PROJECT_DIR$/itcast_p2p_jms/itcast_p2p_jms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_p2p_management/itcast_p2p_management.iml" filepath="$PROJECT_DIR$/itcast_p2p_management/itcast_p2p_management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_p2p_rbac/itcast_p2p_rbac.iml" filepath="$PROJECT_DIR$/itcast_p2p_rbac/itcast_p2p_rbac.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_p2p_service/itcast_p2p_service.iml" filepath="$PROJECT_DIR$/itcast_p2p_service/itcast_p2p_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_p2p_utils/itcast_p2p_utils.iml" filepath="$PROJECT_DIR$/itcast_p2p_utils/itcast_p2p_utils.iml" />
+    </modules>
+  </component>
+</project>

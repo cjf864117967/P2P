@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://cxf.apache.org/jaxrs 
+        http://cxf.apache.org/schemas/jaxrs.xsd">
+	<!-- 关于cxf需要的配置文件 -->
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<!-- <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" /> -->
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+
+	<!-- 声明一个接口实现类 -->
+	<bean id="bankServer" class="cn.itcast.server.impl.BankImpl"></bean>
+
+	<!-- 使用jaxrs:server来描述 -->
+	<jaxrs:server id="bankWebService" address="/bankService">
+		<jaxrs:serviceBeans>
+			<ref bean="bankServer" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+
+</beans>      

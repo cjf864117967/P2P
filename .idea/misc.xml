@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/itcast_p2p_action" />
+    <file type="web" url="file://$PROJECT_DIR$/itcast_p2p_home" />
+    <file type="web" url="file://$PROJECT_DIR$/itcast_p2p_jms" />
+    <file type="web" url="file://$PROJECT_DIR$/itcast_p2p_management" />
+    <file type="web" url="file://$PROJECT_DIR$/MyBank" />
+    <type id="Spring" />
+  </component>
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/itcast_p2p/pom.xml" />
+        <option value="$PROJECT_DIR$/itcast_p2p_home/pom.xml" />
+        <option value="$PROJECT_DIR$/itcast_p2p_jms/pom.xml" />
+        <option value="$PROJECT_DIR$/itcast_p2p_action/pom.xml" />
+        <option value="$PROJECT_DIR$/itcast_p2p_cache/pom.xml" />
+        <option value="$PROJECT_DIR$/itcast_p2p_dao/pom.xml" />
+        <option value="$PROJECT_DIR$/itcast_p2p_domain/pom.xml" />
+        <option value="$PROJECT_DIR$/itcast_p2p_rbac/pom.xml" />
+        <option value="$PROJECT_DIR$/itcast_p2p_service/pom.xml" />
+        <option value="$PROJECT_DIR$/itcast_p2p_utils/pom.xml" />
+        <option value="$PROJECT_DIR$/MyBank/pom.xml" />
+        <option value="$PROJECT_DIR$/itcast_p2p_management/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_12" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+</project>

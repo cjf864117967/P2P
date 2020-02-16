@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<!-- 配置JMS链接模版 -->
+	<bean id="connectionFactory" class="org.apache.activemq.spring.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+		<property name="clientID" value="api2_producer" />
+	</bean>
+
+	<!-- 发送消息的目的地（一个队列） -->
+	<bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+		<!-- 设置消息队列的名字 -->
+		<constructor-arg index="0" value="defaultJmsQueue" />
+	</bean>
+
+	<!--消息获取类 -->
+	<bean id="messageReceiver" class="cn.itcast.jms.consumer.MessageReceiver" />
+
+	<!--给消息获取类加个监听让他能自动获取消息 -->
+	<bean id="listenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="destination" />
+		<property name="messageListener" ref="messageReceiver" />
+		<!-- 该属性值默认为false，这样JMS在进行消息监听的时候就会进行事务控制， 当在接收消息时监听器执行失败时JMS就会对接收到的消息进行回滚， -->
+		<property name="sessionTransacted" value="false" />
+	</bean>
+
+</beans>

@@ -1,0 +1,12 @@
+# Project exclude paths
+/itcast_p2p_action/target/
+/itcast_p2p_cache/target/
+/itcast_p2p_dao/target/
+/itcast_p2p_domain/target/
+/itcast_p2p_home/target/
+/itcast_p2p_jms/target/
+/itcast_p2p_management/target/
+/itcast_p2p_rbac/target/
+/itcast_p2p_service/target/
+/itcast_p2p_utils/target/
+/MyBank/target/

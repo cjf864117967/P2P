@@ -1,0 +1,41 @@
+<!--mainarea-->
+<div id="mainarea">
+    <div class="titleheader">
+        <h2>我的投资</h2>
+    </div>
+    <!--tab-->
+    <div class="u_tab_bar">
+        <div class="u_search" style="float: left;"> 选择日期
+            <input type="text" readonly="readonly" datepicker datestart="datestart" id="date_start" ng-model="sdate"/> - <input type="text" readonly="readonly" datepicker dateend="dateend" id="date_end" ng-model="edate"/>
+            <input type="button" name="button" id="button" value="搜索" ng-click="getDataByDate()" class="so">
+			<input type="button" name="buttonreset" id="buttonreset" value="清空日期" ng-click="reset()" class="so">
+        </div>
+    </div>
+    <!--tab end-->
+    <div class="container"> 
+        <!--tab-->
+        <div class="u_tab_head">
+            <ul class="u_tabMenu" id="tabMenu">
+                <li class="cur" id="one1"><a ui-sref=".buying" _code="10901" for-service="getProductAccountBuying">购买中的计划</a></li>
+                <li id="one2"><a ui-sref=".returning" _code="10903" for-service="getProductAccountReturn">回款中的计划</a></li>
+                <li id="one3"><a ui-sref=".cleared" _code="10904" for-service="getProductAccountBuyed">已结清的计划</a></li>
+            </ul>
+        </div>
+        <!--tab end--> 
+        <div class="u_tabContent" ui-view></div>
+    </div>
+</div>
+<script type="text/javascript">
+    (function(){
+	        var tabMenu = $('#tabMenu');
+	        tabMenu.click(function(e){
+	            var target = e.target,
+	            button = $('#button');
+	            if(target.nodeName === 'A'){	
+	                tabMenu.find('li').removeClass('cur');
+	                $(target).parent().addClass('cur');		
+	                $.service = $(target).attr('for-service');
+	            }
+	        });	
+	    })();
+</script>

@@ -1,0 +1,170 @@
+<style>
+    .table{border:solid 1px #000; border-collapse: collapse;}
+    .table td{border:solid 1px #000 !important; text-align: center;white-space:nowrap;}
+    .table th{border:solid 1px #000 !important; text-align: center !important; background-color: #009dd9; color:#fff;white-space:nowrap;}
+    #addMan_content{ height:350px; overflow: auto;}
+    #bootstrap_dialog{ }
+    /*.modal-dialog{ width: 1000px;}*/
+</style>
+<div id="mainarea"> 
+    <!--loc-->
+    <div class="loc"> 撮合管理 &gt; 待匹配资金队列 </div>
+    <!--loc end-->
+    <div class="container"> 
+        <!--area_block-->
+        <form name="UserTrade" ng-submit="searchUserList(userName,userPhone,accountStatus,safeLevel,accountType);">
+            <div class="area_block">
+                <div class="area_title"> <span class="ico ico-zoom">&nbsp;</span>
+                    <h3>查询</h3>
+                </div>
+                <div class="area_content area_table">
+                    <table width="100%" class="table-edit">
+                        <tr>
+                            <td>
+                                队列截止时间： <input type="text" ng-model="timestamp" readonly="readonly" id="endDate" style="width:225px;" />
+                            </td>
+                            <td><label> 用 &nbsp;户 名： </label>
+                                <input type="text" name="username" id="username" style="width:225px;">
+                            </td>
+                            <td><label>投资编号：
+                                    <input type="text" name="investserial" id="investserial" style="width:225px;">
+                                </label></td>
+                        </tr>
+                        <tr>
+
+                            <td><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投资产品：
+                                    <select style="width:235px;" id="productName">
+                                        <option value="0">全部</option>
+                                        <option value="123">月乘计划</option>
+                                        <option value="118">月存计划</option>
+                                        <option value="119">月取计划</option>
+                                    </select>
+                                </label></td>
+                            <td><label>资金类型：
+                                    <select style="width:235px;" id="investType">
+                                        <option value="0">全部</option>
+                                        <option value="124">新增投资</option>
+                                        <option value="125">回款再投资</option>
+                                        <option value="126">到期结清</option>
+                                        <option value="127">提前结清</option>
+                                    </select>
+                                </label></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="area_foot tc">
+                    <!--<button type="reset" class="button button-cancel">&nbsp;重置&nbsp;</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;-->
+                    <button type="button" endDate="" userName="" productName="0" investType="0" pSerialNo="" class="button button-affirm" id="button_query" ng-click="queryData(1)">&nbsp;查询&nbsp;</button>
+                </div>
+            </div>
+        </form>
+        <!--area_block end--> 
+        <!--area_block-->
+        <div class="area_block">
+            <div class="area_thead">
+                <button type="button" class="button button-affirm" ng-click="startmatching()" id="matching">开始匹配</button>
+                &nbsp;&nbsp;
+                <button type="button" class="button button-affirm" id="exitqueue" ng-click="quitqueue()">退出列队</button>
+                &nbsp;&nbsp;
+                <button type="button" class="button button-affirm" ng-click="exportMatched()" id="export">导出</button>
+            </div>
+            <div class="area_title"> <span class="ico ico-refer">&nbsp;</span>
+                <h3>查询结果</h3>
+            </div>
+            <div class="area_content area_table">
+                <table width="100%" class="table-data table table-row tc" id="tb_weight">
+                    <tr>
+                        <th width="21"><!--<input type="checkbox" ng-model="checkbox" name="checkbox" id="checkbox">--></th>
+                        <th>权重值</th>
+                        <th>用户名</th>
+                        <th>投资编号</th>
+                        <th>投资产品</th>
+                        <th>投资交易时间</th>
+                        <th>期限</th>
+                        <th>本期</th>
+                        <th>待匹配金额</th>
+                        <th>投资类型</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr ng-repeat="user in userList">
+                        <td><input  type="checkbox" ng-checked="checkbox" name="userId" oid="{{user.id}}" _money='{{user.amountWait}}' /></td>
+                        <td _desc="权重值" name="fundWeight"><a href="javascript://" class="c_blue _weight_href" oid="{{user.id}}" >{{user.fundWeight}}</a></td>
+                        <td _desc="用户名" name="userName">{{user.userName}}</td>
+                        <td _desc="投资编号" name="pSerialNo">{{user.pSerialNo}}</td>
+                        <td _desc="投资产品" name="productName">{{user.productName}}</td>
+                        <td _desc="投资交易时间" name="date">{{user.dateDescrible}}</td>
+                        <td _desc="期限" name="deadline">{{user.deadline}}</td>
+                        <td _desc="本期" name="currentMonth">{{user.currentMonth}}</td>
+                        <td _desc="匹配金额" name="amountWait">{{user.amountWait}}</td>
+                        <td _desc="投资类型" name="investType">{{user.investTypeDescrible}}</td>                           
+                        <td class="tl" oid="{{user.subAccountId}}" status="{{user.status}}" serialNo="{{user.pSerialNo}}" productName="{{user.productName}}">
+                            <a href="javascript://" class="c_blue investinfo" proid="{{user.id}}">查看投资详情</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="area_foot tr"> 
+                <div ng-if="totalItems" class="fr">
+                    <pagination ng-change="getData(currentPage)" total-items="totalItems" items-per-page="itemsPerPage" max-size="maxSize"  ng-model="currentPage" class="pagination-sm" boundary-links="true" first-text="首页" last-text="尾页" previous-text="上一页" next-text="下一页"></pagination>
+                </div>
+            </div>
+            <div class="area_title"> <span class="ico ico-refer">&nbsp;</span>
+                <h3>合计</h3>
+            </div>
+            <table width="100%" class="table-data table table-row tc">
+                <tr>
+                    <th>记录合计</th>
+                    <th>金额合计</th>          
+                </tr>
+                <tr>
+                    <td id="manage_count"></td>
+                    <td id="manage_sum"></td>
+                </tr>
+            </table>
+        </div>
+        <!--area_block end--> 
+    </div>
+</div>
+<div id="bootstrap_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div id="sub_bootstrap_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<script type="text/ng-template" id="AddBorrow">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">投资详情</h3>
+            </div>
+            <div class="modal-body">
+                <div id="addMan_content">
+                    <table width="100%" class="table data-infomation">
+
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="ok" data-dismiss="modal" data-backdrop='true' aria-hidden="true">OK</button>
+            </div>
+        </div>
+    </div>
+</script> 
+<script type="text/ng-template" id="dialog_show">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">权重调整</h3>
+            </div>
+            <div class="modal-body">
+                <div id="addMan_content">
+                    <table width="100%" class="table data-infomation">
+
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="ok" onclick="$.changeWeightValue(this,'_weight')" data-dismiss="modal" data-backdrop='true' aria-hidden="true">确定</button>
+                <button class="btn btn-primary" id="cancel" data-dismiss="modal" data-backdrop='true' aria-hidden="true">取消</button>
+            </div>
+        </div>
+    </div>
+</script>
+

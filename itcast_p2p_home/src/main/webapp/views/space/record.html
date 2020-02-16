@@ -1,0 +1,37 @@
+<div id="mainarea">
+    <div class="titleheader">
+        <h2>交易记录</h2>
+    </div>
+    <!--u_search_bar-->
+    <div class="u_search_bar">
+		<div class="u_tab_bar">
+            <h4>交易类型</h4>
+            <ul class="u_tabMenu" id="u_tabMenu">
+                <li><a ng-class="{cur: $state.current.name == 'space.record'}" ui-sref-active="cur" ui-sref=".dealAll" ng-click="search(1,'')">全部</a></li>
+                <li><a ui-sref-active="cur" ui-sref=".rechargeinfo" ng-click="search(1,103)">充值</a></li>
+                <li><a ui-sref-active="cur" ui-sref=".deposit" ng-click="search(1,102)">提现</a></li>
+                <li><a ui-sref-active="cur" ui-sref=".invest" ng-click="search(1,104)">投资</a></li>
+                <li><a ui-sref-active="cur" ui-sref=".earnings" ng-click="search(1,105)">收益</a></li>
+                <li><a ui-sref-active="cur" ui-sref=".principal" ng-click="search(1,106)">回收本金</a></li>
+            </ul>
+        </div>
+        <div class="u_tab_bar">
+            <h4>交易日期</h4>
+            <form name="record" ng-submit="search(1,type)">
+                <div class="u_search" style="float:left;margin-left:10px;"> 选择日期
+                    <input type="text" datepicker datestart="datestart" id="textfield" ng-model="sdate" class="date-text" readOnly="true"/> - <input type="text" datepicker dateend="dateend" id="textfield2" ng-model="edate" class="date-text" readOnly="true"/>
+                    <input type="submit" name="button" id="button" value="查询" class="so">
+                </div>
+            </form>
+            <ul class="u_tabMenu" style="float:left;margin-left:10px;margin-top:2px;">
+                <li><a class="cur" href="javascript:;" ng-click="reset()">清空日期</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <!--u_search_bar end-->
+    <div class="container">
+        <div  ui-view></div>
+    </div>
+</div>
+
